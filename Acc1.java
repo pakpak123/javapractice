@@ -3,26 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package l.pkg7;
+
+import java.util.ArrayList;
 import java.util.Date;
+
 /**
  *
  * @author tp
  */
-public class Account {
+public class Acc1 {
+    private String name;
     private int id;
     private double balance;
     private double annualInterestRate;
     private Date dateCreate;
 
-    public Account() {
-        this(0, 0, 0);
+    public Acc1() {
+        this("",0, 0, 0);
     }
 
-    public Account(int id, double balance, double annualInterestRate) {
-        this.setId(id);
-        this.setBalance(balance);
-        this.setAnnualInterestRate(annualInterestRate);
+    // public Account(int id, double balance, double annualInterestRate) {
+    //     this.setId(id);
+    //     this.setBalance(balance);
+    //     this.setAnnualInterestRate(annualInterestRate);
+    //     dateCreate = new Date();
+    // }
+
+    public Acc1(String name, int id, double balance, double annualInterestRate) {
+        this.setName(name);
+        this.id = id;
+        this.balance = balance;
+        this.annualInterestRate = annualInterestRate;
         dateCreate = new Date();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -53,10 +74,6 @@ public class Account {
         return dateCreate;
     }
 
-    // public void setDateCreate(Date dateCreate) {
-    // this.dateCreate = dateCreate;
-    // }
-
     public double getMonthlyInterestRate() {
         return annualInterestRate / 12;
     }
@@ -69,6 +86,8 @@ public class Account {
         return getClass().getSimpleName() + " id:" + id;
     }
 
+    private ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+
     public void withdraw(double withdraw) {
         if (withdraw <= 0) {
             System.out.println(getClassName() + " Error :: withdraw is not a negative number");
@@ -76,6 +95,7 @@ public class Account {
             System.out.println(getClassName() + " Error :: withdraw is much than balance");
         } else {
             balance -= withdraw;
+            transactionList.add(new Transaction('W', withdraw, balance, ""));
         }
 
     }
@@ -85,11 +105,19 @@ public class Account {
             System.out.println(getClassName() + " Error :: deposit is not a negative number");
         } else {
             balance += deposit;
+            transactionList.add(new Transaction('D', deposit, balance, ""));
         }
     }
 
     public String toString() {
-        return "\nAccount ID : " + id + "\nDate Created : " + dateCreate +"\nBalance : "+ String.format("%.2f", balance)+"\nMonthly Interest : $"+ String.format("%.2f", getMonthlyInterest());
+        return "name : "+name+"\nAccount ID : " + id + "\nDate Created : " + dateCreate +"\nBalance : "+ String.format("%.2f", balance)+"\nAnnual Interest Rate : $"+ String.format("%.2f", getAnnualInterestRate());
     }
-}
 
+    public void transactionToString(){
+        System.out.println("Date\t\t\t\t\tType\t\tAmount\t\tBalance");
+        for (Transaction tsn : transactionList) {
+            System.out.println(tsn.getDataCreated() +"\t\t"+tsn.getType()+"\t\t"+tsn.getAmount()+"\t\t"+tsn.getBalance()+"\t\t"+tsn.getDescription());
+        }
+    }
+
+}

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab11;
+package lab07;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,8 @@ import java.time.LocalDate;
  *
  * @author tp
  */
-class Employee extends Person{
+public class Employee {
+    class Employee extends Person{
     private String office;
     private double salary;
     private LocalDate dateHires;
@@ -81,4 +82,4 @@ class Employee extends Person{
     }
     
 }
-
+}

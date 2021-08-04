@@ -3,22 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package l.pkg7;
+
 import java.util.Date;
+
 /**
  *
  * @author tp
  */
-public class Account {
+public class Acc {
+
     private int id;
     private double balance;
     private double annualInterestRate;
     private Date dateCreate;
 
-    public Account() {
+    public Acc() {
         this(0, 0, 0);
     }
 
-    public Account(int id, double balance, double annualInterestRate) {
+    public Acc(int id, double balance, double annualInterestRate) {
         this.setId(id);
         this.setBalance(balance);
         this.setAnnualInterestRate(annualInterestRate);
